@@ -1,0 +1,60 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "0633032b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "5.392664662608125e-10\n"
+     ]
+    }
+   ],
+   "source": [
+    "import math\n",
+    "\n",
+    "def sin(x=0,n=10):\n",
+    "    thisSin = 0\n",
+    "    for i in range(n):\n",
+    "        #calculate numerator\n",
+    "        num = pow(x,(2*n)+1)\n",
+    "\n",
+    "        #calculate denominator\n",
+    "        den = float(math.factorial((2*n)+1))\n",
+    "\n",
+    "        #add fraction to sum\n",
+    "        thisSin += float(num / den)\n",
+    "\n",
+    "        return thisSin\n",
+    "    \n",
+    "test = mySin(math.pi)\n",
+    "print(test)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
