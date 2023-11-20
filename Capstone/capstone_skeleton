@@ -1,9 +1,11 @@
 class Studio:
     def __init__(self, recordingButton, recordingLight, Song):
-        
+        self.recordingButton = recordingButton
+        self.recordingLight = recordingLight
+        self.Song = Song
     def upload(self, Song):
         file = np.load(Song)
-        Recording.song
+        Recording.song = file
         
     def playSong(self, speaker):
         
@@ -12,30 +14,41 @@ class Studio:
 
 class LED(Studio):
     def __init__(self,ledPin):
-        
+        self.ledPin = ledPin
     def flash(self):      
-    
+        GPIO.setup(ledPin, GPIO.OUT)
+        GPIO.output(ledPin, True)
+        time.sleep(1)
+        GPIO.output(ledPin, False)
 class Button(Studio):
     def __init__(self, buttonPin):
-        
+        self.buttonPin = buttonPin
     def read(self):
-
+        GPIO.setup(buttonPin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+        buttonbool = GPIO.input(buttonPin)
+        return buttonbool
 class speaker:
     def __init__(self, SpeakerPin):
-        
+        self.SpeakerPin = SpeakerPin
     def sing(self, note):
-        
+        pi.hardware_PWM(self.SpeakerPin, Note.Pitch,1e6)
+        time.sleep(Note.duration)
+        pi.hardware_PWM(self.SpeakerPin, 0,0 )
+
 
 class Recording(Studio):
     def __init__(self, song, name):
-        self.song = song
+        self.song = np.array([])
         self.name = name
+    def createfile(self):
+        self.song += [Note.pitch, Note.duration]
     def save(self):
-        recordfile = []
-        recordfile += [Note.pitch, Note.duration]
+        np.save(self.name, self.song)
+        
 class Note(Recording):
     def __init__(self, pitch, duration):
-        
+        self.pitch = pitch
+        self.duration = duration
 
 
 class Theremin:
@@ -49,4 +62,5 @@ class DistanceSensor(Theremin):
     def __init(self, trigPin, echoPin):
         
     def read(self):
+        
         
