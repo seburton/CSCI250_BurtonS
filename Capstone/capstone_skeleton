@@ -1,0 +1,52 @@
+class Studio:
+    def __init__(self, recordingButton, recordingLight, Song):
+        
+    def upload(self, Song):
+        file = np.load(Song)
+        Recording.song
+        
+    def playSong(self, speaker):
+        
+    def recordSong(self, Theremin):
+        
+
+class LED(Studio):
+    def __init__(self,ledPin):
+        
+    def flash(self):      
+    
+class Button(Studio):
+    def __init__(self, buttonPin):
+        
+    def read(self):
+
+class speaker:
+    def __init__(self, SpeakerPin):
+        
+    def sing(self, note):
+        
+
+class Recording(Studio):
+    def __init__(self, song, name):
+        self.song = song
+        self.name = name
+    def save(self):
+        recordfile = []
+        recordfile += [Note.pitch, Note.duration]
+class Note(Recording):
+    def __init__(self, pitch, duration):
+        
+
+
+class Theremin:
+    def __init__(self, noteSensor, typeSensor):
+        
+    def playNote(self, Note, Speaker):
+        
+    def readNote(self):
+        
+class DistanceSensor(Theremin):
+    def __init(self, trigPin, echoPin):
+        
+    def read(self):
+        
