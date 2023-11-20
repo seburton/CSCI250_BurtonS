@@ -8,7 +8,8 @@ class Studio:
         Recording.song = file
         
     def playSong(self, speaker):
-        
+        for pitch, duration in Recording.Song:
+            speaker.sing(pitch, duration)
     def recordSong(self, Theremin):
         
 
@@ -30,9 +31,9 @@ class Button(Studio):
 class speaker:
     def __init__(self, SpeakerPin):
         self.SpeakerPin = SpeakerPin
-    def sing(self, note):
-        pi.hardware_PWM(self.SpeakerPin, Note.Pitch,1e6)
-        time.sleep(Note.duration)
+    def sing(self, pitch, duration):
+        pi.hardware_PWM(self.SpeakerPin, pitch,1e6)
+        time.sleep(duration)
         pi.hardware_PWM(self.SpeakerPin, 0,0 )
 
 
@@ -55,12 +56,11 @@ class Theremin:
     def __init__(self, noteSensor, typeSensor):
         
     def playNote(self, Note, Speaker):
-        
+        Speaker.sing(Note.pitch, Note.duration)
     def readNote(self):
-        
+        return Note.pitch, Note.duration
 class DistanceSensor(Theremin):
     def __init(self, trigPin, echoPin):
         
     def read(self):
-        
         
