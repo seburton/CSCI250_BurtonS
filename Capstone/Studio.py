@@ -5,23 +5,36 @@ import time
 
 def dataProducer(dataQ, theremin, playing):
     #This producer collects data from the distance sensor and adds note frequencies to the queue
-    newNote = theremin.readNote()
-                
-            
-    dataQ.put(newNote)
+    while playing == True:
+        newNote = theremin.readNote()              
+        dataQ.put(newNote)
+        if end == True:
+            playing = False
 
-def dataConsumer(dataQ, theremin):
+def dataConsumer(dataQ, theremin, playing):
     #this consumer gets note frequencies from the queue and plays them on the buzzer
-    toPlay = dataQ.get()
-    theremin.playNote(toPlay)
+    global end
+    end = False
+    startTime = time.time()
+    while playing == True:
+        toPlay = dataQ.get()
+        if time.time() > startTime + 5:
+            dataQ.put(True)
+        if isinstnace(toPlay, bool):
+            playing = False
+            end = True
+            
+        else:
+            theremin.playNote(toPlay)
+        
 
 class Studio:
 
     def __init__(self, Theremin):
         self.Theremin = Theremin
         self.dataQ = queue.Queue()
-        self.dataCollection = threading.Thread(target = dataProducer, args = (self.dataQ,self.Theremin))
-        self.dataReading = threading.Thread(target = dataConsumer, args = (self.dataQ,self.Theremin))
+        self.dataCollection = threading.Thread(target = dataProducer, args = (self.dataQ,self.Theremin, self.Theremin.readType()))
+        self.dataReading = threading.Thread(target = dataConsumer, args = (self.dataQ,self.Theremin, self.Theremin.readType()))
         
         
     def playTheremin(self, playing):
@@ -29,7 +42,5 @@ class Studio:
             self.dataCollection.start()
             self.dataReading.start()
             
-            dataQ.join()
-
-        if playing == False:
-            stop_threads = True
+            self.dataQ.join()
+            

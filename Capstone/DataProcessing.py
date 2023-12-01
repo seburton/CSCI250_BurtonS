@@ -57,10 +57,10 @@ def discretizeNote(dataset):
     return dataNotes, dataFrequencies
 
 def discretizeType(dataset):
-    '''this function discretizes distance sensor data into two sound types depending on distance reading. Returns one array of frequencies which represent each sound. Note lengths are ~0.05 seconds.'''
+    '''this function discretizes distance sensor data into two sound types depending on distance reading. Returns one array of bools which represent each sound type (normal or quiet..'''
     types = {
-        'Normal' : 50,
-        'Vibrato' : 6
+        'Normal' : True,
+        'Quiet' : False
     }
     #discretize distances accordingly
     minimumDist = 1.0
