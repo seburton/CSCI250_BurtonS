@@ -20,7 +20,10 @@ class Theremin:
 
     
     def readNote(self):
-        noteDistance = self.noteSensor.read()
-        newNote = Note(noteDistance)
+        distances = []
+        for i in range(10):
+            noteDistance = self.noteSensor.read()
+            distances.append(noteDistance)
+        newNote = Note(distances)
         
         return newNote

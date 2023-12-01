@@ -2,8 +2,8 @@ import DataProcessing
 
 class Note:
     
-    def __init__(self, distance):
-        note, frequency = DataProcessing.discretizeNote(distance)
+    def __init__(self, distances):
+        note, frequency = DataProcessing.discretizeNote(distances)
         
         self.pitch = frequency
-        self.duration = 0.05
+        self.duration = 0.5

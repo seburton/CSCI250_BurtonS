@@ -15,7 +15,7 @@ def medianFilter(dataset):
             filteredSet.append(np.median(workingSet))
     return filteredSet
 
-def discretizeNote(data):
+def discretizeNote(dataset):
     '''takes a smooth dataset and discretizes into notes in octave 4. Each note is approximately 0.05 seconds long. returns two arrays: data notes and data frequencies, respectively'''
     #make dictionary of notes
     notes = {
@@ -39,6 +39,9 @@ def discretizeNote(data):
     maximumDist = 50.0
     #each section represents a note corresponding with dictionary order
     distanceDiscretizations = np.arange(minimumDist, maximumDist, (maximumDist-minimumDist)/len(notes))
+
+    #set data to be median of dataset
+    data = np.median(dataset)
     
     for j in range(len(distanceDiscretizations)-1):
         #if the distance is between the current and previous distance discretizations, record note
