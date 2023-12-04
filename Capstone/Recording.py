@@ -1,8 +1,8 @@
 import numpy as np
-import note as Note
+import Note as Note
 
 class Recording():
-    def __init__(self, song, name):
+    def __init__(self, name):
         self.song = np.array([])
         self.name = name
         
