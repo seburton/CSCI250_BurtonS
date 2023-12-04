@@ -1,46 +1,29 @@
 from Theremin import Theremin
 import threading
 import queue
-import time
-
-def dataProducer(dataQ, theremin, playing):
-    #This producer collects data from the distance sensor and adds note frequencies to the queue
-    while playing == True:
-        newNote = theremin.readNote()              
-        dataQ.put(newNote)
-        if end == True:
-            playing = False
-
-def dataConsumer(dataQ, theremin, playing):
-    #this consumer gets note frequencies from the queue and plays them on the buzzer
-    global end
-    end = False
-    startTime = time.time()
-    while playing == True:
-        toPlay = dataQ.get()
-        if time.time() > startTime + 5:
-            dataQ.put(True)
-        if isinstnace(toPlay, bool):
-            playing = False
-            end = True
-            
-        else:
-            theremin.playNote(toPlay)
-        
+import time        
 
 class Studio:
 
     def __init__(self, Theremin):
         self.Theremin = Theremin
         self.dataQ = queue.Queue()
-        self.dataCollection = threading.Thread(target = dataProducer, args = (self.dataQ,self.Theremin, self.Theremin.readType()))
-        self.dataReading = threading.Thread(target = dataConsumer, args = (self.dataQ,self.Theremin, self.Theremin.readType()))
+
+    def dataConsumer(self, dataQ, theremin):
+        #this consumer gets note frequencies from the queue and plays them on the buzzer
+        self.dataQ = queue.Queue()
+        while True:
+            newNote = theremin.readNote()              
+            self.dataQ.put(newNote)
+            toPlay = self.dataQ.get()
+            if toPlay == False:
+                print("Loop Broken")
+                break
+            else:
+                theremin.playNote(toPlay)
         
-        
-    def playTheremin(self, playing):
-        if playing == True:
-            self.dataCollection.start()
-            self.dataReading.start()
-            
-            self.dataQ.join()
-            
+    def playTheremin(self):
+        threading.Thread(target = self.dataConsumer, args = (self.dataQ,self.Theremin)).start()
+
+    def stopTheremin(self):
+        self.dataQ.put(False)

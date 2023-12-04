@@ -62,18 +62,21 @@ def discretizeType(dataset):
         'Normal' : True,
         'Quiet' : False
     }
+    typeNames = ['Normal', 'Quiet']
     #discretize distances accordingly
     minimumDist = 1.0
     maximumDist = 50.0
     #each section represents a note corresponding with dictionary order
     distanceDiscretizations = np.arange(minimumDist, maximumDist, (maximumDist-minimumDist)/len(types))
+
+    data = np.median(dataset)
     
     for j in range(len(distanceDiscretizations)-1):
         #if the distance is between the current and previous distance discretizations, record type
         if data > distanceDiscretizations[j] and data < distanceDiscretizations[j+1]:
-            dataTypes = types[j] 
+            dataTypes = types['Normal'] 
         elif data > distanceDiscretizations[-1]:
-            dataTypes = typeNames[-1]
+            dataTypes = types['Quiet']
             break
 
     return dataTypes

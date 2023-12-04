@@ -21,16 +21,17 @@ class Theremin:
     
     def readNote(self):
         distances = []
-        for i in range(10):
+        for i in range(5):
             noteDistance = self.noteSensor.read()
             distances.append(noteDistance)
-        newNote = Note(distances)
+        type = self.readType()
+        newNote = Note(distances, type)
         
         return newNote
 
     def readType(self):
         type = []
-        for i in range(10):
+        for i in range(5):
             noteType = self.typeSensor.read()
             type.append(noteType)
         
