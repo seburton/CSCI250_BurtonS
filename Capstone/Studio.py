@@ -2,6 +2,8 @@ from Theremin import Theremin
 import threading
 import queue
 import time        
+import Button
+import LED
 
 class Studio:
 
@@ -16,6 +18,14 @@ class Studio:
             newNote = theremin.readNote()              
             self.dataQ.put(newNote)
             toPlay = self.dataQ.get()
+            if Button.read() == True or buttonsave == 1:
+                buttonsave = 1
+                LED.on()
+                Recording.createfile()
+                if Button.read() == True:
+                    buttonsave = 0
+                    Recorning.save()
+                    LED.off()
             if toPlay == False:
                 print("Loop Broken")
                 break
