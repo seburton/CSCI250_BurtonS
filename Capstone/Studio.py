@@ -8,11 +8,11 @@ import Recording
 
 class Studio:
 
-    def __init__(self, Theremin, Button, Light, recording):
+    def __init__(self, Theremin, Button, Light, Recording):
         self.Theremin = Theremin
         self.Button = Button
         self.Light = Light
-        self.Recording = recording
+        self.Recording = Recording
         self.dataQ = queue.Queue()
 
     def dataConsumer(self, dataQ, theremin, recording):
