@@ -7,7 +7,7 @@ class Recording():
         self.name = name
         self.filenum = 0
     def createfile(self):
-        self.song += [Note.pitch, Note.duration]
+        self.song += toplay
         
     def save(self):
         filename = 'saves/' + self.name + str(self.filenum)+'.npz'
