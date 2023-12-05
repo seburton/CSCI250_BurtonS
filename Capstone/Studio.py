@@ -14,6 +14,8 @@ class Studio:
     def dataConsumer(self, dataQ, theremin):
         #this consumer gets note frequencies from the queue and plays them on the buzzer
         self.dataQ = queue.Queue()
+        buttonsave = 0
+        filenum = 0
         while True:
             newNote = theremin.readNote()              
             self.dataQ.put(newNote)
@@ -24,7 +26,8 @@ class Studio:
                 Recording.createfile()
                 if Button.read() == True:
                     buttonsave = 0
-                    Recorning.save()
+                    filenum += 1
+                    Recorning.save(filenum)
                     LED.off()
             if toPlay == False:
                 print("Loop Broken")
