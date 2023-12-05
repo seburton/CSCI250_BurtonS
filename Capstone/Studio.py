@@ -27,7 +27,7 @@ class Studio:
                 if Button.read() == True:
                     buttonsave = 0
                     filenum += 1
-                    Recorning.save(filenum)
+                    Recording.save(filenum)
                     LED.off()
             if toPlay == False:
                 print("Loop Broken")
