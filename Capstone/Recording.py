@@ -6,7 +6,7 @@ class Recording():
         self.song = np.array([])
         self.name = name
         self.filenum = 0
-    def createfile(self):
+    def createfile(self, toplay):
         self.song += toplay
         
     def save(self):
