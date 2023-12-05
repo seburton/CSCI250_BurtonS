@@ -26,7 +26,7 @@ class Studio:
             if button.read() == True or buttonsave == 1:
                 buttonsave = 1
                 light.on()
-                recording.createfile(toplay)
+                recording.createfile(toPlay)
                 if button.read() == True:
                     buttonsave = 0
                     recording.filenum += 1
