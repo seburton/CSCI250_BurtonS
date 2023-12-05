@@ -4,6 +4,7 @@ import queue
 import time        
 import Button
 import LED
+import Recording
 
 class Studio:
 
