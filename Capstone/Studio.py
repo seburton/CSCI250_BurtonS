@@ -8,14 +8,14 @@ import Recording
 
 class Studio:
 
-    def __init__(self, Theremin, Button, Light, Recording, Button, Light):
+    def __init__(self, Theremin, Button, Light, Recording):
         self.Theremin = Theremin
         self.Button = Button
         self.Light = Light
         self.Recording = Recording
         self.dataQ = queue.Queue()
 
-    def dataConsumer(self, dataQ, theremin, recording, button, light):
+    def dataConsumer(self, dataQ, theremin, button, light, recording, ):
         #this consumer gets note frequencies from the queue and plays them on the buzzer
         self.dataQ = queue.Queue()
         buttonsave = 0
@@ -39,7 +39,7 @@ class Studio:
                 theremin.playNote(toPlay)
         
     def playTheremin(self):
-        threading.Thread(target = self.dataConsumer, args = (self.dataQ,self.Theremin, self.Recording, self.Button, Self.Light)).start()
+        threading.Thread(target = self.dataConsumer, args = (self.dataQ,self.Theremin, self.Button, self.Light, self.Recording)).start()
 
     def stopTheremin(self):
         self.dataQ.put(False)
