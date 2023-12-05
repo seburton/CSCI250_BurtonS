@@ -10,5 +10,5 @@ class Recording():
         self.song += [Note.pitch, Note.duration]
         
     def save(self):
-        filename = self.name + str(self.filenum)+'.npz'
+        filename = 'saves/' + self.name + str(self.filenum)+'.npz'
         np.save(filename, self.song)
