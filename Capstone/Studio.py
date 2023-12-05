@@ -18,7 +18,6 @@ class Studio:
         #this consumer gets note frequencies from the queue and plays them on the buzzer
         self.dataQ = queue.Queue()
         buttonsave = 0
-        Recording.filenum = 0
         while True:
             newNote = theremin.readNote()              
             self.dataQ.put(newNote)
