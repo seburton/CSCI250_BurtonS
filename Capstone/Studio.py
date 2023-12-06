@@ -5,6 +5,7 @@ import time
 import Button
 import LED
 import Recording
+import numpy as np
 
 class Studio:
 
