@@ -46,7 +46,7 @@ class Studio:
 
     def playback(self, filename):
         data = np.load(filename, allow_pickle = True)
-        for i, j in data.pitch, data.duration:
-            pi.hardware_PWM(self.Button,int(i), int(j))
-            time.sleep(j)
-            pi.hardware_PWM(buzPin, 0, 0)
+        for i in data.pitch:
+            self.Theremin.playNote(data[i])
+
+
