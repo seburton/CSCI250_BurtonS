@@ -19,19 +19,24 @@ class Studio:
         #this consumer gets note frequencies from the queue and plays them on the buzzer
         self.dataQ = queue.Queue()
         buttonsave = 0
+        lightsave = 0
         while True:
             newNote = theremin.readNote()              
             self.dataQ.put(newNote)
             toPlay = self.dataQ.get()
             if button.read() == True or buttonsave == 1:
+                if lightsave == 0:
+                    light.on()
+                    lightsave = 1
+                    time.sleep(1)
                 buttonsave = 1
-                light.on()
                 recording.createfile(toPlay)
                 if button.read() == True:
                     buttonsave = 0
                     recording.filenum += 1
                     recording.save()
                     light.off()
+                    lightsave = 0
             if toPlay == False:
                 print("Loop Broken")
                 break
