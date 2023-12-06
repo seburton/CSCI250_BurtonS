@@ -10,5 +10,5 @@ class Recording():
         self.song.append(toPlay)
         
     def save(self):
-        filename = 'saves/' + self.name + str(self.filenum)
+        filename = 'Saves/' + self.name + str(self.filenum)
         np.save(filename, self.song)
