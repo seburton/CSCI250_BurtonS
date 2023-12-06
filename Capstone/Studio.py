@@ -52,7 +52,8 @@ class Studio:
 
     def playback(self, filename):
         data = np.load(filename, allow_pickle = True)
-        for i in data.pitch:
-            self.Theremin.playNote(i)
+        for i in range(len(data)):
+            self.Theremin.leftSpeaker.sing(data[i])
+            print(data[i].pitch)
 
 
